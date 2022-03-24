@@ -1,15 +1,21 @@
 #!/usr/bin/env groovy
 import org.apache.commons.lang3.StringUtils
-import static.groovy.io.FileType.FILES
+import groovy.io.FileType.FILES
 
 def call(String workspace, String versionFileName = "VERSION") {
     File versionFile = new File(workspace, versionFileName)
     String version = versionFile.text
 
+    def list = []
+
     def dir = new File(workspace)
-    def files = [];
-    dir.traverse(type: FILES, maxDepth: 0) { files.add(it) };
-    println(files)
+    dir.eachFileRecurse (FileType.FILES) { file ->
+        list << file
+    }
+
+    list.each {
+        println it.path
+    }
 
     def parser = /(?<major>\d+).(?<minor>\d+).(?<patch>\d+)/
     def match = version =~ parser
