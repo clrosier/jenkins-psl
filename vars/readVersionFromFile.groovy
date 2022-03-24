@@ -3,9 +3,6 @@ import org.apache.commons.lang3.StringUtils
 import groovy.io.FileType
 
 def call(String workspace, String versionFileName = "VERSION") {
-    File versionFile = new File(workspace, versionFileName)
-    String version = versionFile.text
-
     def list = []
 
     def dir = new File(workspace)
@@ -16,6 +13,9 @@ def call(String workspace, String versionFileName = "VERSION") {
     list.each {
         println it.path
     }
+    
+    File versionFile = new File(workspace, versionFileName)
+    String version = versionFile.text
 
     def parser = /(?<major>\d+).(?<minor>\d+).(?<patch>\d+)/
     def match = version =~ parser
