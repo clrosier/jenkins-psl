@@ -1,8 +1,8 @@
 #!/usr/bin/env groovy
 import org.apache.commons.lang3.StringUtils
 
-def call(String versionFilePath = "VERSION") {
-    File versionFile = new File(versionFilePath)
+def call(String workspace, String versionFileName = "VERSION") {
+    File versionFile = new File(workspace, versionFileName)
     String version = versionFile.text
     
     def parser = /(?<major>\d+).(?<minor>\d+).(?<patch>\d+)/
