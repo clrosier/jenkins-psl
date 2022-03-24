@@ -3,17 +3,7 @@ import org.apache.commons.lang3.StringUtils
 import groovy.io.FileType
 
 def call(String workspace, String versionFileName = "VERSION") {
-    def list = []
-
-    def dir = new File(workspace)
-    dir.eachFileRecurse (FileType.FILES) { file ->
-        list << file
-    }
-
-    list.each {
-        println it.path
-    }
-    
+   
     File versionFile = new File(workspace, versionFileName)
     String version = versionFile.text
 
